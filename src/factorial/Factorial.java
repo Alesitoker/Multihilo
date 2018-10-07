@@ -10,13 +10,13 @@ public class Factorial implements Runnable{
 
     @Override
     public void run() {
-        long suma = 1;
+        long factorial = 1;
         int i = 1;
         while (i <= numero) {
-            suma *= i;
+            factorial *= i;
             i++;
         }
-        resultado = suma;
+        resultado = factorial;
     }
 
 }
