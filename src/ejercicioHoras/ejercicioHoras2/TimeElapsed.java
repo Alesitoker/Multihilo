@@ -1,4 +1,4 @@
-package ejercicioHoras;
+package ejercicioHoras.ejercicioHoras2;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -8,19 +8,17 @@ public class TimeElapsed implements Runnable {
     @Override
     public void run() {
         LocalTime hour = LocalTime.now();
-        int second = hour.plusSeconds(20).getSecond();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH:mm:ss");
-        
-        System.out.println(hour.format(formato));
-        do {
+
+        while (!Thread.currentThread().isInterrupted()){
+            System.out.println(hour.format(formato));
             try {
-                TimeUnit.SECONDS.sleep(2);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("Amarillo");
                 return;
             }
             hour = hour.plusSeconds(2);
-            System.out.println(hour.format(formato));
-        } while(hour.getSecond() != second);
+        }
     }
 }
