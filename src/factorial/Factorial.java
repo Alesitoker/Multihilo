@@ -1,8 +1,8 @@
 package factorial;
 
 public class Factorial implements Runnable{
-    int numero;
-    long resultado;
+    private int numero;
+    private long resultado;
 
     Factorial(int numero){
         this.numero = numero;
@@ -19,4 +19,7 @@ public class Factorial implements Runnable{
         resultado = factorial;
     }
 
+    public long getResultado() {
+        return resultado;
+    }
 }

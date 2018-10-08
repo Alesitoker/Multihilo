@@ -20,6 +20,6 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(f1.resultado+f2.resultado+f3.resultado);
+        System.out.println(f1.getResultado()+f2.getResultado()+f3.getResultado());
     }
 }
