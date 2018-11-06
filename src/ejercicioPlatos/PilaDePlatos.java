@@ -12,27 +12,29 @@ public class PilaDePlatos {
     public PilaDePlatos() {
     }
 
-    public synchronized Plato removePlato() {
+    public synchronized Plato removePlato(String nameThread) {
         Plato plato;
         while (platos.size() == 0) {
             try {
                 wait();
-                System.out.println("No puedo");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         plato = platos.getLast();
         platos.removeLast();
-        System.out.printf("El plato %d esta %s\n", plato.getNumero(), plato.getEstado());
-//        notifyAll();
+        System.out.printf("%s coge el plato %d que esta %s\n", nameThread,plato.getNumero(), plato.getEstado());
         return plato;
     }
 
-    public synchronized void addPlato(Plato plato) {
+    public synchronized void addPlato(Plato plato, String nameThread) {
         platos.addLast(plato);
-        System.out.printf("El plato %d esta %s\n", plato.getNumero(), plato.getEstado());
+        System.out.printf("%s guarda el plato %d que esta %s\n", nameThread,plato.getNumero(), plato.getEstado());
         notifyAll();
+    }
+
+    public synchronized int getSize() {
+        return platos.size();
     }
 
 

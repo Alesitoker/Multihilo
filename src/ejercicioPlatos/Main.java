@@ -5,18 +5,18 @@ import java.util.LinkedList;
 
 public class Main {
     public static void main(String[] args) {
-        PilaDePlatos platosSucios, platosFregados = new PilaDePlatos(), platosSecos = new PilaDePlatos(), alacena = new PilaDePlatos();
+        PilaDePlatos pilaPlatosSucios, pilaPlatosFregados = new PilaDePlatos(), pilaPlatosSecos = new PilaDePlatos(), alacena = new PilaDePlatos();
         Thread fregador;
-        Thread secador = new Thread(new Secador(platosFregados, platosSecos));
-        Thread colocador = new Thread(new Colocador(platosSecos, alacena));
-        LinkedList<Plato> platos = new LinkedList<Plato>();
+        Thread secador = new Thread(new Secador(pilaPlatosFregados, pilaPlatosSecos), "Secador");
+        Thread colocador = new Thread(new Colocador(pilaPlatosSecos, alacena), "Colocador");
+        LinkedList<Plato> platos = new LinkedList<>();
 
         for (int i = 0; i < 50; i++) {
             platos.addLast(new Plato(i, Estado.SUCIO));
         }
 
-        platosSucios = new PilaDePlatos(platos);
-        fregador = new Thread(new Fregador(platosSucios, platosFregados));
+        pilaPlatosSucios = new PilaDePlatos(platos);
+        fregador = new Thread(new Fregador(pilaPlatosSucios, pilaPlatosFregados), "Fregador");
 
         fregador.start();
         secador.start();

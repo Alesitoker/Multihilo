@@ -3,26 +3,26 @@ package ejercicioPlatos;
 import java.util.concurrent.TimeUnit;
 
 public class Fregador implements Runnable {
-    PilaDePlatos platosSucios;
-    PilaDePlatos platosFregados;
+    PilaDePlatos pilaPlatosSucios;
+    PilaDePlatos pilaPlatosFregados;
 
-    public Fregador(PilaDePlatos platosSucios, PilaDePlatos platosFregados) {
-        this.platosSucios = platosSucios;
-        this.platosFregados = platosFregados;
+    public Fregador(PilaDePlatos pilaPlatosSucios, PilaDePlatos pilaPlatosFregados) {
+        this.pilaPlatosSucios = pilaPlatosSucios;
+        this.pilaPlatosFregados = pilaPlatosFregados;
     }
 
     @Override
     public void run() {
         Plato plato;
-        for (int i = 0; i < 50; i++) {
-            plato = platosSucios.removePlato();
+        while (pilaPlatosSucios.getSize() > 0) {
+            plato = pilaPlatosSucios.removePlato(Thread.currentThread().getName());
+            plato.setEstado(Estado.FREGADO);
+            pilaPlatosFregados.addPlato(plato, Thread.currentThread().getName());
             try {
-                TimeUnit.SECONDS.sleep(10);
+                TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            plato.setEstado(Estado.FREGADO);
-            platosFregados.addPlato(plato);
         }
     }
 }
