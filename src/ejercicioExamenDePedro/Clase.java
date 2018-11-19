@@ -19,10 +19,11 @@ public class Clase {
     }
 
     public void realizarExamen(String name) {
-//        int pc;
+        int pc;
         try {
             pedro.acquire();
-            int pc = getPC();
+
+            pc = getPC();
             System.out.printf("%s comienza el examen en el ordenador %d\n", name, pc);
             TimeUnit.SECONDS.sleep(rnd.nextInt(5)+1);
             System.out.printf("%s termina de hacer el examen en el ordenador %d\n", name, pc);
